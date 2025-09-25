@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Helpdesk System</title>
+
+    <link href="{{ url_for('static', filename='img/favicon.144x144.png') }}" rel="apple-touch-icon" type="image/png" sizes="144x144">
+    <link href="{{ url_for('static', filename='img/favicon.114x114.png') }}" rel="apple-touch-icon" type="image/png" sizes="114x114">
+    <link href="{{ url_for('static', filename='img/favicon.72x72.png') }}" rel="apple-touch-icon" type="image/png" sizes="72x72">
+    <link href="{{ url_for('static', filename='img/favicon.57x57.png') }}" rel="apple-touch-icon" type="image/png">
+    <link href="{{ url_for('static', filename='img/favicon.png') }}" rel="icon" type="image/png">
+    <link href="{{ url_for('static', filename='img/favicon.ico') }}" rel="shortcut icon">
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/separate/pages/login.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/lib/font-awesome/font-awesome.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/lib/bootstrap/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+    <!-- SweetAlert2 CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+</head>
+<body>
+
+    <div class="page-center">
+        <div class="page-center-in">
+            <div class="container-fluid">
+                <form class="sign-box" method="POST" action="">
+                    <div class="sign-avatar no-photo">&plus;</div>
+                    <header class="sign-title">Sign Up</header>
+                    <div class="form-group">
+                        <input type="text" class="form-control" name="name" placeholder="Nombre" required/>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" class="form-control" name="lastname" placeholder="Apellido" required/>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" class="form-control" name="phone" placeholder="Teléfono"/>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" class="form-control" name="dni" placeholder="DNI"/>
+                    </div>
+                    <div class="form-group">
+                        <input type="email" class="form-control" name="email" placeholder="E-Mail" required/>
+                    </div>
+                    <div class="form-group">
+                        <input type="password" class="form-control" name="password" placeholder="Password" required/>
+                    </div>
+                    <div class="form-group">
+                        <input type="password" class="form-control" name="repeat_password" placeholder="Repeat password" required/>
+                    </div>
+                    <button type="submit" class="btn btn-rounded btn-success sign-up">Sign up</button>
+                    <p class="sign-note">Already have an account? <a href="{{ url_for('index') }}">Sign in</a></p>
+                </form>
+            </div>
+        </div>
+    </div><!--.page-center-->
+
+    <script src="{{ url_for('static', filename='js/lib/jquery/jquery.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/lib/tether/tether.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/lib/bootstrap/bootstrap.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/plugins.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/lib/match-height/jquery.matchHeight.min.js') }}"></script>
+    <!-- SweetAlert2 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    
+    <script>
+        $(function() {
+            $('.page-center').matchHeight({
+                target: $('html')
+            });
+
+            $(window).resize(function(){
+                setTimeout(function(){
+                    $('.page-center').matchHeight({ remove: true });
+                    $('.page-center').matchHeight({
+                        target: $('html')
+                    });
+                },100);
+            });
+        });
+
+        // Manejo de mensajes flash con SweetAlert2
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    {% if category == 'error' %}
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Error',
+                            text: '{{ message }}',
+                            confirmButtonColor: '#3085d6',
+                            confirmButtonText: 'OK'
+                        });
+                    {% elif category == 'success' %}
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Éxito',
+                            text: '{{ message }}',
+                            confirmButtonColor: '#3085d6',
+                            confirmButtonText: 'OK'
+                        });
+                    {% elif category == 'info' %}
+                        Swal.fire({
+                            icon: 'info',
+                            title: 'Información',
+                            text: '{{ message }}',
+                            confirmButtonColor: '#3085d6',
+                            confirmButtonText: 'OK'
+                        });
+                    {% else %}
+                        Swal.fire({
+                            icon: 'info',
+                            title: 'Mensaje',
+                            text: '{{ message }}',
+                            confirmButtonColor: '#3085d6',
+                            confirmButtonText: 'OK'
+                        });
+                    {% endif %}
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+    </script>
+    <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+</body>
+</html>

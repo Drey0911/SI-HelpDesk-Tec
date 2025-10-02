@@ -1,5 +1,11 @@
 # Sistema de HelpDesk
 
+# Sistema de despliegue 
+Para este sistema se utilizo el deploy con RENDER en: https://si-helpdesk-tec.onrender.com
+
+# Dificultades
+La principal y unica dificultad fue el host de la base de datos, ya que se uso con MySQL, librerias y conectores en python, asi que para evitar una tediosa y larga migracion, se opto por usar Clever Cloud.
+
 ## Descripción General
 Sistema de gestión de tickets de soporte técnico que permite a los usuarios crear, gestionar y dar seguimiento a incidencias técnicas. La aplicación está desarrollada con Flask y utiliza MySQL como base de datos.
 
